@@ -15,18 +15,20 @@ for one_data in data:
     if (name not in has_check_name_list):
         has_check_name_list.append(name)
         for key in should_add_list:
-            one_data[key] = 0 if str(one_data[key]).strip(
-            ) == '' else int(one_data[key])
+            one_data[key] = (
+                int(one_data[key]) if str(one_data[key]).strip() else 0
+            )
+
         last_list.append(one_data)
     else:
         try:
             index = has_check_name_list.index(name)
             for key_name in should_add_list:
-                if (str(one_data[key_name]).strip() != ''):
+                if not str(one_data[key_name]).strip():
+                    num = 0
+                else:
                     num = int(one_data[key_name])
                     last_list[index][key_name] += num
-                else:
-                    num = 0
         except Exception as e:
             print(one_data)
 
